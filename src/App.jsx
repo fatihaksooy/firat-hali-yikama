@@ -333,10 +333,12 @@ function App() {
             </h1>
 
             <p className="mt-4 max-w-xl text-sm leading-relaxed text-slate-700 sm:text-base">
-              Fırat Halı Yıkama olarak, Şanlıurfa'da halı, koltuk ve perde
-              temizliğinde modern makineler ve antibakteriyel temizlik
-              ürünleriyle hizmet veriyoruz. Evinizde bahar ferahlığı ve ilk
-              günkü temizlik hissi için buradayız.
+              Peygamberler Şehri Şanlıurfa'nın temizlikteki kaliteli yüzü
+              olarak, yılların tecrübesini modern makinelerle birleştirdik.
+              Fırat'ın bereketiyle yıkanan halılarınızı, Karaköprü'den
+              Eyyübiye'ye kadar her kapıdan alıp, tertemiz ve mis kokulu bir
+              şekilde geri teslim ediyoruz. Bizim için sadece temizlik değil,
+              komşuluk hakkı ve güven her şeyden önce gelir.
             </p>
 
             <div className="mt-6 flex flex-wrap items-center gap-4">
