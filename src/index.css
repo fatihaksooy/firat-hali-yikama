@@ -1,0 +1,127 @@
+@import "tailwindcss";
+
+/* Custom Animations & Styles */
+@keyframes ping-slow {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes wave {
+  0%, 100% {
+    transform: translateX(0) translateY(0);
+  }
+  50% {
+    transform: translateX(-25px) translateY(-10px);
+  }
+}
+
+.animate-ping-slow {
+  animation: ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Glassmorphism Utility */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.glass-dark {
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Modern Shadow */
+.shadow-modern {
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1),
+              0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.shadow-modern-lg {
+  box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.15),
+              0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+/* Handwritten underline */
+.handwritten-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.handwritten-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 8px;
+  background: linear-gradient(to right, #fbbf24, #f59e0b);
+  opacity: 0.4;
+  border-radius: 2px;
+  transform: rotate(-1deg);
+  z-index: -1;
+}
+
+.handwritten-underline-turquoise::after {
+  background: linear-gradient(to right, #06b6d4, #0891b2);
+  opacity: 0.5;
+}
+
+/* Background Pattern */
+.bg-water-pattern {
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(14, 165, 233, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 40% 20%, rgba(125, 211, 252, 0.03) 0%, transparent 50%);
+  background-size: 100% 100%;
+  position: relative;
+}
+
+.bg-water-pattern::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 2px,
+      rgba(59, 130, 246, 0.02) 2px,
+      rgba(59, 130, 246, 0.02) 4px
+    );
+  pointer-events: none;
+}
