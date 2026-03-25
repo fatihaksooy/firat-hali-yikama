@@ -712,16 +712,17 @@ function App() {
           id="pricing"
           className="mt-16 rounded-3xl bg-gradient-to-r from-sky-50 via-sky-100/80 to-slate-50 p-6 shadow-inner sm:mt-20 sm:p-8"
         >
-          <div className="grid gap-8 md:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] md:items-center">
+<div className="grid gap-8 md:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] md:items-center overflow-hidden">
             <div>
-              <h2 className="text-xl font-extrabold tracking-tight text-slate-900 sm:text-2xl">
-                Şeffaf ve <span className="handwritten-underline">Uygun Fiyat</span> Politikası
-              </h2>
-              <p className="mt-2 max-w-xl text-sm text-slate-700">
-                Fiyatlarımız, halınızın metrekaresine ve yoğunluğuna göre
-                belirlenir. Halı başına değil, metrekare üzerinden adil
-                fiyatlandırma yapıyoruz.
-              </p>
+            <h2 className="text-xl font-extrabold tracking-tight text-slate-900 sm:text-2xl">
+             Şeffaf ve{" "} 
+              <span className="handwritten-underline-turquoise">Uygun Fiyat</span>{" "}
+                 Politikası
+            </h2>
+            <p className="mt-2 w-full text-sm text-slate-700 leading-relaxed">
+  Fiyatlarımız, halınızın metrekaresine ve yoğunluğuna göre belirlenir. 
+  Halı başına değil, metrekare üzerinden adil fiyatlandırma yapıyoruz.
+</p>
 
               <div className="mt-4 grid gap-3 text-sm text-slate-700 sm:grid-cols-2">
                 <div className="rounded-2xl border border-sky-100 bg-white/80 p-4 text-xs sm:text-sm">
