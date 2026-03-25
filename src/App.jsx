@@ -10,6 +10,7 @@ import {
   Star,
   Quote,
   Menu,
+  X,
   ChevronRight,
   ChevronDown,
   Wind,
@@ -236,6 +237,7 @@ function App() {
   const [m2, setM2] = useState("");
   const [openFaq, setOpenFaq] = useState(null);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const parsed = parseFloat(String(m2).replace(",", "."));
   const isValid = !Number.isNaN(parsed) && parsed > 0;
@@ -274,10 +276,33 @@ function App() {
     return () => clearInterval(interval);
   }, [testimonials.length]);
 
+  // iOS Safari: menü açıkken arka plan kaydırmasını kapat
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [mobileMenuOpen]);
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") setMobileMenuOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [mobileMenuOpen]);
+
   return (
     <div className="min-h-screen bg-water-pattern bg-gradient-to-b from-sky-50 via-blue-50/30 to-slate-50 text-slate-900">
       {/* Navbar */}
-      <header className="sticky top-0 z-20 glass border-b border-white/20 shadow-modern">
+      <header
+        className={`sticky top-0 glass border-b border-white/20 shadow-modern ${
+          mobileMenuOpen ? "z-[80]" : "z-20"
+        }`}
+      >
         <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:h-20 sm:px-6 lg:px-8">
           <div className="flex items-center gap-3 sm:gap-4">
             {/* Özel Logo SVG */}
@@ -313,11 +338,64 @@ function App() {
             </button>
           </div>
 
-          <button className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white p-1.5 text-slate-700 shadow-sm md:hidden">
-            <Menu className="h-4 w-4" />
+          <button
+            type="button"
+            className="relative z-50 inline-flex min-h-[44px] min-w-[44px] cursor-pointer touch-manipulation items-center justify-center rounded-full border border-slate-200 bg-white p-1.5 text-slate-700 shadow-sm [-webkit-tap-highlight-color:transparent] md:hidden"
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-nav-menu"
+            aria-label={mobileMenuOpen ? "Menüyü kapat" : "Menüyü aç"}
+            onClick={() => setMobileMenuOpen((open) => !open)}
+          >
+            {mobileMenuOpen ? (
+              <X className="pointer-events-none h-5 w-5" aria-hidden />
+            ) : (
+              <Menu className="pointer-events-none h-5 w-5" aria-hidden />
+            )}
           </button>
         </nav>
       </header>
+
+      {/* Mobil menü: overlay header altından başlar (Safari’de üst barın altında kalmaz); panel yüksek z-index */}
+      {mobileMenuOpen && (
+        <>
+          <div
+            className="fixed inset-x-0 bottom-0 top-16 z-[100] bg-slate-900/45 backdrop-blur-[2px] sm:top-20 md:hidden"
+            aria-hidden
+            onClick={() => setMobileMenuOpen(false)}
+          />
+          <div
+            id="mobile-nav-menu"
+            className="fixed inset-x-0 top-16 z-[110] glass border-b border-white/30 shadow-modern sm:top-20 md:hidden"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobil menü"
+          >
+            <nav className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-4 sm:px-6">
+              {navItems.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="cursor-pointer touch-manipulation rounded-xl px-3 py-3 text-base font-medium text-slate-800 transition hover:bg-white/60 active:bg-white/80"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {item.label}
+                </a>
+              ))}
+              <button
+                type="button"
+                className="mt-2 inline-flex cursor-pointer touch-manipulation items-center justify-center gap-2 rounded-full bg-sky-600 px-4 py-3 text-sm font-semibold text-white shadow-md [-webkit-tap-highlight-color:transparent]"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  handleWhatsAppClick();
+                }}
+              >
+                <PhoneCall className="h-4 w-4" />
+                Hemen Ara
+              </button>
+            </nav>
+          </div>
+        </>
+      )}
 
       <main className="mx-auto max-w-6xl px-4 pb-20 pt-8 sm:px-6 sm:pt-10 lg:px-8">
         {/* Hero */}
